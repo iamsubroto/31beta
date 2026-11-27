@@ -2,6 +2,11 @@
 
 Use this file to orient quickly at the start of a new session.
 
+## Active Modification Scope
+
+- **All future modifications must be performed ONLY inside `31beta/`** (`C:\Backup\31beta\31beta`).
+- Do not modify `vanilla-site/`, `30beta/`, or `bilingual-ganoderma-coffee/` unless the user explicitly asks to change them.
+
 ## Workspace Overview
 
 - **Root**: `C:\Backup\31beta`
@@ -22,7 +27,7 @@ Use this file to orient quickly at the start of a new session.
   - Hidden campaign tracking inputs (`pais`, `ciudad`, `estado`, `usuario`, `template`, `idioma`) at top of `<body>` and inside `#distributor-form`; `script.js` keeps all `input[name="idioma"]` synced with the active `ES`/`EN` language.
   - `#distributor-form` submits via standard `POST` to `../../registro_prospecto_subdominio_autoresponder.php` with `<?php include('../campana_user.php'); ?>` and geo/user/template/idioma hidden inputs (client-side validation blocks empty/invalid email).
   - Copyright year rendered via `date('Y')`.
-- **Assets**: All 12 `.jpg` images in `31beta/assets/images/` and `favicon.ico` in `31beta/assets/icons/favicon.ico`. `31beta/style.css` is byte-identical to `vanilla-site/style.css`.
+- **Assets**: All 12 `.jpg` images in `31beta/assets/images/` and the Vioniko favicon (`https://vioniko.com/favicon.ico`, matching `https://vioniko.com/landingpage/29beta/index_beta.php?subdominio=aprendeganando`) saved locally in `31beta/assets/icons/favicon.ico`. `31beta/style.css` is byte-identical to `vanilla-site/style.css`.
 
 ## Strict Rules for `vanilla-site/`
 

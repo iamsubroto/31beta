@@ -71,7 +71,8 @@ $currentYear = date('Y');
       name="twitter:description"
       content="Café con extracto de ganoderma. Sabor 100% a café, energía sin nervios y bienestar diario."
     />
-    <link rel="icon" href="./assets/icons/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="./assets/icons/favicon.ico?v=2" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/icons/favicon.ico?v=2" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
