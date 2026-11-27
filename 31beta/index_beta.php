@@ -46,7 +46,7 @@ $whatsapp = preg_replace('/\D+/', '', (string) $whatsappRaw);
 if ($whatsapp === '') {
     $whatsapp = '528110169320';
 }
-$video = !empty($video) ? $video : 'https://www.youtube-nocookie.com/embed/6Y15eqJ37O8?autoplay=1&rel=0';
+$video = 'https://vioniko.s3.us-west-2.amazonaws.com/videos/plantacionganodermadeganoexcel.mp4';
 $currentYear = date('Y');
 ?>
 <!DOCTYPE html>
@@ -1844,6 +1844,6 @@ $currentYear = date('Y');
       </footer>
     </div>
 
-    <script src="script.js?v=1.0.0"></script>
+    <script src="script.js?v=1.0.1"></script>
   </body>
 </html>

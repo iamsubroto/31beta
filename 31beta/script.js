@@ -6,7 +6,8 @@
      ========================================================================== */
   const STORAGE_KEY = "omc-lang";
   const DEFAULT_WHATSAPP = "528110169320";
-  const DEFAULT_VIDEO_URL = "https://www.youtube-nocookie.com/embed/6Y15eqJ37O8?autoplay=1&rel=0";
+  const DEFAULT_VIDEO_URL =
+    "https://vioniko.s3.us-west-2.amazonaws.com/videos/plantacionganodermadeganoexcel.mp4";
 
   function getWhatsAppNumber() {
     const raw = (document.body && document.body.getAttribute("data-whatsapp")) || "";
@@ -919,10 +920,14 @@
     // Update product WhatsApp links
     document.querySelectorAll(".product-card[data-product]").forEach(updateProductCtaHref);
 
-    // Update active YouTube iframe title if playing
+    // Update active video player title/aria-label if playing
     const iframe = document.querySelector("#plantation-video-media iframe");
     if (iframe) {
       iframe.setAttribute("title", I18N["home.videoIframeTitle"][state.lang]);
+    }
+    const videoEl = document.querySelector("#plantation-video-media video");
+    if (videoEl) {
+      videoEl.setAttribute("aria-label", I18N["home.videoIframeTitle"][state.lang]);
     }
 
     // Update form dynamic labels
@@ -1057,23 +1062,30 @@
       frameContainer.className = "video-iframe-wrap";
 
       const videoUrl = getVideoUrl();
+      let videoEl = null;
       if (/\.(mp4|webm|ogg)($|\?)/i.test(videoUrl)) {
-        const videoEl = document.createElement("video");
+        videoEl = document.createElement("video");
         videoEl.src = videoUrl;
+        videoEl.poster = "./assets/images/plantacion-ganoderma.jpg";
         videoEl.controls = true;
         videoEl.autoplay = true;
         videoEl.playsInline = true;
         videoEl.setAttribute("playsinline", "");
+        videoEl.setAttribute("webkit-playsinline", "");
         videoEl.setAttribute("controlslist", "nodownload noplaybackrate");
         videoEl.disablePictureInPicture = true;
+        videoEl.disableRemotePlayback = true;
+        videoEl.setAttribute("disableremoteplayback", "");
+        videoEl.setAttribute("aria-label", I18N["home.videoIframeTitle"][state.lang]);
         videoEl.className = "video-iframe";
+        videoEl.style.backgroundColor = "#000";
         videoEl.addEventListener("contextmenu", function (ev) {
           ev.preventDefault();
         });
+        videoEl.addEventListener("dragstart", function (ev) {
+          ev.preventDefault();
+        });
         frameContainer.appendChild(videoEl);
-        if (videoEl.play) {
-          videoEl.play().catch(function () {});
-        }
       } else {
         const iframe = document.createElement("iframe");
         iframe.src = toEmbedVideoUrl(videoUrl);
@@ -1088,6 +1100,10 @@
 
       mediaWrap.innerHTML = "";
       mediaWrap.appendChild(frameContainer);
+
+      if (videoEl && videoEl.play) {
+        videoEl.play().catch(function () {});
+      }
 
       if (bodyWrap) bodyWrap.classList.add("is-playing");
       if (ctaBtn) ctaBtn.hidden = true;
