@@ -10,6 +10,19 @@ Use this file to orient quickly at the start of a new session.
   - Live site: `https://subroto-coffee.lovable.app` (and `https://subroto-coffee.lovable.app/distribuye`)
   - Local rendered HTML snapshot: `output.html`
 - **Target Deliverable**: `vanilla-site/` — Plain HTML/CSS/JS pixel-identical conversion of the live site.
+- **PHP Reference Template**: `30beta/` — Existing Vioniko landing page (`index_beta.php`, `style.css`, `script.js`, `assets/`).
+- **PHP Landing Page Deliverable**: `31beta/` — Dynamic PHP conversion of `vanilla-site/` following `30beta/` conventions (`index_beta.php`, `style.css`, `script.js`, `assets/images/`, `assets/icons/favicon.ico`).
+
+## PHP Landing Page (`31beta/`)
+
+- **Bootstrap (`index_beta.php`)**: Uses `to_utf8()`, CORS/OPTIONS headers, `?mode=edit` redirect to `https://vioniko.com/landingpage/3beta/index_beta.php`, `$template = 196`, and `include_once('../../subdominio_ini.php')`.
+- **Dynamic fields**:
+  - WhatsApp number from `$rowUSU['whatsapp']` (digits sanitized, fallback `528110169320`) rendered into all `wa.me` links and `body[data-whatsapp]` for `script.js`.
+  - Plantation video from `$video` (fallback `https://www.youtube-nocookie.com/embed/6Y15eqJ37O8?autoplay=1&rel=0`) passed via `body[data-video]`; `script.js` supports both YouTube embeds (auto-normalized) and direct `.mp4`/`.webm`/`.ogg` video overrides.
+  - Hidden campaign tracking inputs (`pais`, `ciudad`, `estado`, `usuario`, `template`, `idioma`) at top of `<body>` and inside `#distributor-form`; `script.js` keeps all `input[name="idioma"]` synced with the active `ES`/`EN` language.
+  - `#distributor-form` submits via standard `POST` to `../../registro_prospecto_subdominio_autoresponder.php` with `<?php include('../campana_user.php'); ?>` and geo/user/template/idioma hidden inputs (client-side validation blocks empty/invalid email).
+  - Copyright year rendered via `date('Y')`.
+- **Assets**: All 12 `.jpg` images in `31beta/assets/images/` and `favicon.ico` in `31beta/assets/icons/favicon.ico`. `31beta/style.css` is byte-identical to `vanilla-site/style.css`.
 
 ## Strict Rules for `vanilla-site/`
 
